@@ -21,34 +21,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MailIcon from "@mui/icons-material/Mail";
 import CodeIcon from "@mui/icons-material/Code";
-import PsychologyIcon from "@mui/icons-material/Psychology";
-import PaletteIcon from "@mui/icons-material/Palette";
-import ArticleIcon from "@mui/icons-material/Article";
-import PeopleIcon from "@mui/icons-material/People";
-
-const domainIcons = {
-  tech: CodeIcon,
-  "ml-android": PsychologyIcon,
-  design: PaletteIcon,
-  content: ArticleIcon,
-  community: PeopleIcon
-};
-
-const domainColors = {
-  tech: { color: "#f8d8d8", darkColor: "#e5a3a3" },
-  "ml-android": { color: "#c3ecf6", darkColor: "#7dd3e8" },
-  design: { color: "#ccf6c5", darkColor: "#8fe880" },
-  content: { color: "#ffe7a5", darkColor: "#ffd54f" },
-  community: { color: "#f0f0f0", darkColor: "#c0c0c0" }
-};
-
-const domainTitles = {
-  tech: "Tech",
-  "ml-android": "ML & Android",
-  design: "Design",
-  content: "Content",
-  community: "Community"
-};
+import { getDomainById, roleMatchesDomain } from "@/constants/domainConfig";
 
 const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
   const theme = useTheme();
@@ -69,55 +42,20 @@ const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
     };
   }, []);
 
-  const Icon = domainIcons[domain] || CodeIcon;
-  const colors = domainColors[domain] || domainColors.tech;
-  const domainTitle = domainTitles[domain] || "Tech";
-
-  // Helper function to match domain
-  const roleMatchesDomain = (role, domain) => {
-    const roleLower = role.toLowerCase();
-    if (domain === "tech") {
-      return roleLower.includes("technical") || 
-             roleLower.includes("tech") || 
-             roleLower.includes("web") || 
-             roleLower.includes("developer") ||
-             roleLower.includes("development");
-    } else if (domain === "ml-android") {
-      return roleLower.includes("android") || 
-             roleLower.includes("ml") || 
-             roleLower.includes("machine learning") || 
-             roleLower.includes("ai") ||
-             roleLower.includes("artificial intelligence");
-    } else if (domain === "design") {
-      return roleLower.includes("design") || 
-             roleLower.includes("designer") || 
-             roleLower.includes("ui") || 
-             roleLower.includes("ux") ||
-             roleLower.includes("graphic");
-    } else if (domain === "content") {
-      return roleLower.includes("content") || 
-             roleLower.includes("writer") || 
-             roleLower.includes("writing") || 
-             roleLower.includes("blog") ||
-             roleLower.includes("blogger");
-    } else if (domain === "community") {
-      return roleLower.includes("community") || 
-             roleLower.includes("management") || 
-             roleLower.includes("manager") || 
-             roleLower.includes("outreach");
-    }
-    return false;
-  };
+  const domainInfo = getDomainById(domain) || getDomainById("tech");
+  const Icon = domainInfo.icon || CodeIcon;
+  const colors = { color: domainInfo.color, darkColor: domainInfo.darkColor };
+  const domainTitle = domainInfo.title;
 
   // Filter members by domain
   const allMembers = [...(teamData.core || []), ...(teamData.members || [])];
   const domainMembers = allMembers.filter((member) => 
-    roleMatchesDomain(member.role, domain)
+    member && member.role && roleMatchesDomain(member.role, domain)
   );
 
   // Find domain lead (first core member or first member)
-  const domainLead = domainMembers.find((member) => member.type === "core") || domainMembers[0];
-  const domainTeamMembers = domainMembers.filter((member) => member.id !== domainLead?.id);
+  const domainLead = domainMembers.find((member) => member && member.type === "core") || domainMembers[0];
+  const domainTeamMembers = domainMembers.filter((member) => member && member.id && member.id !== domainLead?.id);
 
   const borderColors = [
     theme.colors.brandBlue,
@@ -163,7 +101,7 @@ const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
 
       <main style={{ width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "4rem 2rem" }}>
         {/* Team Lead Section */}
-        {domainLead && (
+        {domainLead && domainLead.profile && (
           <TeamLeadSection>
             <Typography variant="h1" style={{ textAlign: "center", marginBottom: "3rem" }}>
               Team Lead
@@ -174,15 +112,15 @@ const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
                   <Avatar
                     size={isMobile ? "xl" : "xl"}
                     borderColor={colors.darkColor}
-                    url={domainLead.profile.image}
+                    url={domainLead.profile?.image}
                     borderWidth={4}
                   />
                 </MemberImageContainer>
                 <MemberName>
-                  <Typography variant="h3">{domainLead.profile.name}</Typography>
+                  <Typography variant="h3">{domainLead.profile?.name || "Unknown"}</Typography>
                 </MemberName>
                 <MemberActions>
-                  {domainLead.profile.profileLink && (
+                  {domainLead.profile?.profileLink && (
                     <Link
                       href={domainLead.profile.profileLink}
                       target="_blank"
@@ -201,7 +139,7 @@ const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
                       <LinkedInIcon sx={{ fontSize: 16, color: theme.colors.textPrimary }} />
                     </Link>
                   )}
-                  {domainLead.profile.social && (
+                  {domainLead.profile?.social && (
                     <Link
                       href={`mailto:${domainLead.profile.social}`}
                       style={{
@@ -231,21 +169,21 @@ const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
               Team Members
             </Typography>
             <MemberGrid>
-              {domainTeamMembers.map((member, index) => (
-                <MemberCard key={member.id}>
+              {domainTeamMembers.filter(member => member && member.profile).map((member, index) => (
+                <MemberCard key={member.id || index}>
                   <MemberImageContainer borderColor={borderColors[index % 4]}>
                     <Avatar
                       size={isMobile ? "lg" : "xl"}
                       borderColor={borderColors[index % 4]}
-                      url={member.profile.image}
+                      url={member.profile?.image}
                       borderWidth={4}
                     />
                   </MemberImageContainer>
                   <MemberName>
-                    <Typography variant="h5">{member.profile.name}</Typography>
+                    <Typography variant="h5">{member.profile?.name || "Unknown"}</Typography>
                   </MemberName>
                   <MemberActions>
-                    {member.profile.profileLink && (
+                    {member.profile?.profileLink && (
                       <Link
                         href={member.profile.profileLink}
                         target="_blank"
@@ -264,7 +202,7 @@ const DomainTeamPage = ({ teamData, domain, teamSlug }) => {
                         <LinkedInIcon sx={{ fontSize: 16, color: theme.colors.textPrimary }} />
                       </Link>
                     )}
-                    {member.profile.social && (
+                    {member.profile?.social && (
                       <Link
                         href={`mailto:${member.profile.social}`}
                         style={{

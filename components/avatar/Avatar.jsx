@@ -21,7 +21,7 @@ const Avatar = ({
       ref={ref}
     >
       <Image
-        src={url ?? "/images/gdsc_fallback.png"}
+        src={(url && url.trim()) || "/images/gdsc_fallback.png"}
         alt="Avatar"
         fill={true}
         priority={priority}

@@ -91,6 +91,22 @@ If you want to use Supabase Storage for images:
    - `gallery` (for gallery images)
    - `profile-images` (for profile pictures)
 3. Set bucket policies (public or private based on your needs)
+   - For public buckets: Allow read access to everyone
+   - For private buckets: You'll need to use the service role key (see below)
+
+### Optional: Service Role Key for Admin Uploads
+
+For uploading files programmatically (via scripts or API), you can optionally add the service role key to your `.env` file:
+
+1. Go to **Settings** → **API** in your Supabase dashboard
+2. Copy the **service_role key** (keep this secret - it has admin access!)
+3. Add to your `.env` file:
+
+```env
+SUPABASE_SERVICE_ROLE_KEY="your-service-role-key-here"
+```
+
+**Warning**: The service role key bypasses Row Level Security. Never expose it in client-side code. Only use it in server-side scripts and API routes.
 
 ## Troubleshooting
 
@@ -108,10 +124,53 @@ If you want to use Supabase Storage for images:
 - Make sure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set
 - The anon key is safe to expose in client-side code (it's protected by Row Level Security)
 
+## Step 8: Upload Avatar Images to Supabase
+
+The project includes functionality to upload avatar images directly to Supabase Storage. You have two options:
+
+### Option 1: Using the Command Line Script
+
+Use the provided script to upload images from your local machine:
+
+```bash
+node scripts/upload-avatar-to-supabase.js <image-path> <profile-id> [bucket-name] [folder]
+```
+
+**Example:**
+```bash
+node scripts/upload-avatar-to-supabase.js ./avatar.png 1
+node scripts/upload-avatar-to-supabase.js ./avatar.png 1 profile-images avatars
+```
+
+The script will:
+1. Upload the image to Supabase Storage
+2. Generate a unique filename to avoid conflicts
+3. Update the profile's image URL in the database
+
+### Option 2: Using the API Endpoint
+
+You can also upload images via the API endpoint at `/api/upload/avatar`:
+
+**POST** `/api/upload/avatar`
+
+**Request Body:**
+```json
+{
+  "profileId": 1,
+  "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...",
+  "fileName": "avatar.png",
+  "bucketName": "profile-images",
+  "folder": "avatars"
+}
+```
+
+The `image` field should be a base64-encoded image string (with or without the `data:image/...;base64,` prefix).
+
 ## Next Steps
 
 - Your Prisma setup is now configured for Supabase PostgreSQL
 - You can use `@/lib/supabase` to access Supabase Storage and other features
 - Your existing Prisma queries will work with Supabase PostgreSQL
+- Upload avatar images using the provided script or API endpoint
 
 

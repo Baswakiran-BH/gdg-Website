@@ -2,53 +2,14 @@ import DomainTeamPage from "@/components/team/DomainTeamPage";
 import prisma from "@/lib/prisma";
 import Head from "next/head";
 import React from "react";
-
-// Helper function to match domain
-const roleMatchesDomain = (role, domain) => {
-  const roleLower = role.toLowerCase();
-  if (domain === "tech") {
-    return roleLower.includes("technical") || 
-           roleLower.includes("tech") || 
-           roleLower.includes("web") || 
-           roleLower.includes("developer") ||
-           roleLower.includes("development");
-  } else if (domain === "ml-android") {
-    return roleLower.includes("android") || 
-           roleLower.includes("ml") || 
-           roleLower.includes("machine learning") || 
-           roleLower.includes("ai") ||
-           roleLower.includes("artificial intelligence");
-  } else if (domain === "design") {
-    return roleLower.includes("design") || 
-           roleLower.includes("designer") || 
-           roleLower.includes("ui") || 
-           roleLower.includes("ux") ||
-           roleLower.includes("graphic");
-  } else if (domain === "content") {
-    return roleLower.includes("content") || 
-           roleLower.includes("writer") || 
-           roleLower.includes("writing") || 
-           roleLower.includes("blog") ||
-           roleLower.includes("blogger");
-  } else if (domain === "community") {
-    return roleLower.includes("community") || 
-           roleLower.includes("management") || 
-           roleLower.includes("manager") || 
-           roleLower.includes("outreach");
-  }
-  return false;
-};
+import fs from "fs";
+import path from "path";
+import { transformTeamData } from "@/utils/transformTeamData";
+import { validDomains, getDomainById } from "@/constants/domainConfig";
 
 const DomainTeam = ({ teamData, domain, teamSlug }) => {
-  const domainTitles = {
-    tech: "Tech",
-    "ml-android": "ML & Android",
-    design: "Design",
-    content: "Content",
-    community: "Community"
-  };
-
-  const domainTitle = domainTitles[domain] || "Tech";
+  const domainInfo = getDomainById(domain) || { title: "Tech" };
+  const domainTitle = domainInfo.title;
 
   return (
     <>
@@ -70,75 +31,141 @@ export const getStaticProps = async (ctx) => {
   const { slug, domain } = ctx.params;
   
   // Validate domain
-  const validDomains = ["tech", "ml-android", "design", "content", "community"];
   if (!validDomains.includes(domain)) {
     return {
       notFound: true
     };
   }
   
-  const response = await prisma.team.findUnique({
-    include: {
-      members: {
-        include: {
-          profile: true
-        },
-        orderBy: {
-          priority: "asc"
-        }
-      }
-    },
-    where: {
-      slug: slug
-    }
-  });
-  
-  if (response) {
-    const { name, members } = response;
-    
-    const teamData = {
-      name,
-      lead: members.find((member) => member.type === "lead"),
-      members: members.filter((member) => member.type === "member"),
-      core: members.filter((member) => member.type === "core")
-    };
+  const forceJsonTeams = ["2024", "2025"];
 
-    return {
-      props: {
-        teamData,
-        domain,
-        teamSlug: slug
-      }
-    };
-  } else {
-    return {
-      notFound: true
-    };
+  // For 2024 and 2025, always use JSON
+  if (forceJsonTeams.includes(slug)) {
+    try {
+      const filePath = path.join(process.cwd(), "data", "teams", `${slug}.json`);
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const jsonData = JSON.parse(fileContents);
+      const teamData = transformTeamData(jsonData);
+
+      return {
+        props: {
+          teamData,
+          domain,
+          teamSlug: slug
+        }
+      };
+    } catch (error) {
+      console.error(`Error loading Team ${slug} data:`, error);
+      return {
+        notFound: true
+      };
+    }
   }
+  
+  // For other teams, try loading from database first
+  try {
+    const response = await prisma.team.findUnique({
+      include: {
+        members: {
+          include: {
+            profile: true
+          },
+          orderBy: {
+            priority: "asc"
+          }
+        }
+      },
+      where: {
+        slug: slug
+      }
+    });
+    
+    if (response) {
+      const { name, members } = response;
+      
+      const teamData = {
+        name,
+        lead: members.find((member) => member.type === "lead"),
+        members: members.filter((member) => member.type === "member"),
+        core: members.filter((member) => member.type === "core")
+      };
+
+      return {
+        props: {
+          teamData,
+          domain,
+          teamSlug: slug
+        }
+      };
+    }
+  } catch (error) {
+    console.error("Database connection failed in getStaticProps:", error.message);
+  }
+
+  // If database lookup fails or returns no data, try fallback JSON (e.g. for 2021, 2022, 2023)
+  try {
+    const filePath = path.join(process.cwd(), "data", "teams", `${slug}.json`);
+    if (fs.existsSync(filePath)) {
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const jsonData = JSON.parse(fileContents);
+      const teamData = transformTeamData(jsonData);
+
+      return {
+        props: {
+          teamData,
+          domain,
+          teamSlug: slug
+        }
+      };
+    }
+  } catch (error) {
+    console.error(`Error loading fallback Team ${slug} data:`, error);
+  }
+
+  return {
+    notFound: true
+  };
 };
 
 export const getStaticPaths = async (ctx) => {
-  const teams = await prisma.team.findMany({
-    select: {
-      slug: true
-    }
-  });
+  let paths = [];
   
-  const domains = ["tech", "ml-android", "design", "content", "community"];
-  
-  const paths = teams.flatMap((team) =>
-    domains.map((domain) => ({
-      params: {
-        slug: team.slug,
-        domain: domain
+  try {
+    // Try to fetch teams from database
+    const teams = await prisma.team.findMany({
+      select: {
+        slug: true
       }
-    }))
-  );
+    });
+    
+    paths = teams.flatMap((team) =>
+      validDomains.map((domain) => ({
+        params: {
+          slug: team.slug,
+          domain: domain
+        }
+      }))
+    );
+  } catch (error) {
+    // If database is unavailable, log error and continue with static paths only
+    console.warn("Database connection failed in getStaticPaths, using static paths only:", error.message);
+  }
+
+  // Add Team paths (static JSON data)
+  const staticTeams = ["2021", "2022", "2023", "2024", "2025"];
+  staticTeams.forEach((year) => {
+    validDomains.forEach((domain) => {
+      paths.push({
+        params: {
+          slug: year,
+          domain: domain
+        }
+      });
+    });
+  });
 
   return {
     paths,
     fallback: "blocking"
   };
 };
-
-

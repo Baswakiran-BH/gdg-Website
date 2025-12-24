@@ -1,0 +1,367 @@
+{
+  "year": "2024",
+  "title": "Team 2024",
+  "members": [
+    {
+      "name": "Greeshma D J",
+      "role": "Organizer",
+      "position": "Organizer",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/greeshma-d-j.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/greeshma-dj-5b6a06242?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Ashish Ramesh",
+      "role": "Tech Lead",
+      "position": "Tech Lead",
+      "bio": "Vice President @ Robotics Club MVJCE | GDSC Tech Team Member",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1717167239/Members/image/Ashish-Ramesh.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/ashish-ramesh-7566ba245/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Faiz Mohammed Zameer",
+      "role": "Tech Member",
+      "position": "Tech Member",
+      "bio": "CSD Undergrad|GDSC Member",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714228600/Members/image/faiz-zameer.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/faiz-mohammed-zameer-ab678824a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "S Naren Kumar",
+      "role": "Tech Member",
+      "position": "Tech Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Kausthub Peddibhotla",
+      "role": "Tech Member",
+      "position": "Tech Member",
+      "bio": "",
+      "avatar": " ",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/kausthub-p-12a314340/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Vatsala Budur",
+      "role": "ML and Android Lead",
+      "position": "ML and Android Lead",
+      "bio": "CSE Undergrad | GDSC MVJCE ML and Android Member",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714229918/Members/image/vatsala-budur.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/vatsala-budur/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Aaghaaz Khan",
+      "role": "ML and Android Member",
+      "position": "ML and Android Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Heerath Bhat",
+      "role": "ML and Android Member",
+      "position": "ML and Android Member",
+      "bio": "Android and Web Dev | GDSC MVJCE",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714230065/Members/image/heerath-bhat.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/heerathbhat/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Shabista Sehar",
+      "role": "ML and Android Member",
+      "position": "ML and Android Member",
+      "bio": "",
+      "avatar": "https://rkxyhsskayiwaywhnwfg.supabase.co/storage/v1/object/public/gallery-images/Team_2025/shabista.ml.lead.png",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/shabista-sehar/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Bharath Sai Karanti",
+      "role": "ML and Android Member",
+      "position": "ML and Android Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/bharathsj3026/"
+         
+        
+      }
+    },
+    {
+      "name": "Sahil Sinha",
+      "role": "ML and Android Member",
+      "position": "ML and Android Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Kunal Natesh",
+      "role": "ML and Android Member",
+      "position": "ML and Android Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Nithin M Gowda",
+      "role": "Design Lead",
+      "position": "Design Lead",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714198347/Members/image/nithin-m.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Shalini Kannan",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/shalini-kannan-536221302/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Chaithra R",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Satyam Samanta",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "www.linkedin.com/in/satyam-samanta-a4a243293/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Bhuvana Shree N",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "P A Suchi",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/p-a-suchi-0a6b5233b/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Harshath R",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "https://www.linkedin.com/in/harshath-r-2a5974301/",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Dhanvish SJ",
+      "role": "Design Member",
+      "position": "Design Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Chinmay Kodiyar",
+      "role": "Content Lead",
+      "position": "Content Lead",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Angelin Gia",
+      "role": "Content Member",
+      "position": "Content Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "MD Nadeem",
+      "role": "Content Member",
+      "position": "Content Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Chinmay Kodiyar",
+      "role": "Community Lead",
+      "position": "Community Lead",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Sachin Kumar Patel",
+      "role": "Community Member",
+      "position": "Community Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Prasanna Rajendran",
+      "role": "Community Member",
+      "position": "Community Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Rishi Nayak",
+      "role": "Community Member",
+      "position": "Community Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Raagav Krishnan K.S",
+      "role": "Community Member",
+      "position": "Community Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Naresh M",
+      "role": "Community Member",
+      "position": "Community Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    },
+    {
+      "name": "Harshith.G.Reddy",
+      "role": "Community Member",
+      "position": "Community Member",
+      "bio": "",
+      "avatar": "https://res.cloudinary.com/dp9ikb8xo/image/upload/v1714233051/Members/image/placeholder.jpg",
+      "links": {
+        "linkedin": "",
+        "email": "",
+        "twitter": ""
+      }
+    }
+  ]
+}
+
